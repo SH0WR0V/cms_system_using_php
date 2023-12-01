@@ -55,6 +55,13 @@ include "includes/header.php";
                                     <input type="submit" name="submit" class="btn btn-primary">
                                 </div>
                             </form>
+
+                            <?php
+                            if (isset($_GET['edit'])) {
+                                include "includes/update_category.php";
+                            }
+                            ?>
+
                         </div>
 
                         <div class="col-xs-6">
@@ -76,6 +83,7 @@ include "includes/header.php";
                                         echo "<tr>";
                                         echo "<td>{$cat_id}</td>";
                                         echo "<td>{$cat_title}</td>";
+                                        echo "<td><a href = 'categories.php?edit={$cat_id}'>Edit</a></td>";
                                         echo "<td><a href = 'categories.php?delete={$cat_id}'>Delete</a></td>";
                                         echo "</tr>";
                                     }
