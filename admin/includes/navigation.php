@@ -7,7 +7,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html">CMS Admin</a>
+        <a class="navbar-brand" href="./index.php">CMS Admin</a>
     </div>
 
     <!-- Top Menu Items -->
@@ -43,7 +43,7 @@
                         <a href="./posts.php"> View All Posts</a>
                     </li>
                     <li>
-                        <a href="#"> Add Posts</a>
+                        <a href="./posts.php?source=add_post"> Add Posts</a>
                     </li>
                 </ul>
             </li>
