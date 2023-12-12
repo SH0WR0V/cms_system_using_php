@@ -34,7 +34,14 @@
             echo "<td>$post_id</td>";
             echo "<td>$post_author</td>";
             echo "<td>$post_title</td>";
-            echo "<td>$post_category_id</td>";
+
+            $query_for_cat_title = "select * from categories where cat_id = $post_category_id";
+            $result_for_cat_title = mysqli_query($connection, $query_for_cat_title);
+            while ($row = mysqli_fetch_assoc($result_for_cat_title)) {
+                $cat_title = $row['cat_title'];
+            }
+            echo "<td>$cat_title</td>";
+
             echo "<td>$post_status</td>";
             echo "<td><img width='80' src='../images/$post_image' alt='image'></td>";
             echo "<td>$post_content</td>";

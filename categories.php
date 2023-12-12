@@ -21,7 +21,10 @@
             <!-- First Blog Post -->
 
             <?php
-            $query = "select * from posts";
+            if (isset($_GET['categories'])) {
+                $cat_id = $_GET['categories'];
+            }
+            $query = "select * from posts where post_category_id = $cat_id";
             $data = mysqli_query($connection, $query);
 
             while ($row = mysqli_fetch_assoc($data)) {
