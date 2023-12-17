@@ -49,8 +49,8 @@
             }
             echo "<td><a href='../post.php?p_id=$comment_post_id'>$result_for_post_title</a></td>";
             echo "<td>$comment_date</td>";
-            echo "<td><a href='comments.php?c_status_app=$comment_id='>Approve</a></td>";
-            echo "<td><a href='comments.php?c_status_unapp=$comment_id='>Unapprove</a></td>";
+            echo "<td><a href='comments.php?c_status_app=$comment_id'>Approve</a></td>";
+            echo "<td><a href='comments.php?c_status_unapp=$comment_id'>Unapprove</a></td>";
             echo "<td><a href='posts.php?delete='>Edit</a></td>";
             echo "<td><a href='comments.php?delete=$comment_id'>Delete</a></td>";
             echo "</tr>";
