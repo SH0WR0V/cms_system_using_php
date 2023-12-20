@@ -2,6 +2,13 @@
 <?php include "../includes/db.php" ?>
 <?php session_start(); ?>
 
+<?php
+
+if ($_SESSION['role'] !== 'admin') {
+    header("Location: ../index.php");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
