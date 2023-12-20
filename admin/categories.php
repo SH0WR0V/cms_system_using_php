@@ -24,7 +24,7 @@ include "includes/header.php";
                     <div class="col-lg-12">
                         <h1 class="page-header">
                             Welcome to Admin
-                            <small>Author</small>
+                            <small><?php echo $_SESSION['username'] ?></small>
                         </h1>
 
 
@@ -52,7 +52,7 @@ include "includes/header.php";
                                     <input type="text" name="cat_title" class="form-control">
                                 </div>
                                 <div class="form-group">
-                                    <input type="submit" name="submit" class="btn btn-primary">
+                                    <input type="submit" name="submit" class="btn btn-primary" value="Add Category">
                                 </div>
                             </form>
 

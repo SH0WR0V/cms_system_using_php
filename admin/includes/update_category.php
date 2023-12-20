@@ -29,6 +29,6 @@
     }
     ?>
     <div class="form-group">
-        <input type="submit" name="update" class="btn btn-primary" value="Update">
+        <input type="submit" name="update" class="btn btn-primary" value="Update Category">
     </div>
 </form>
