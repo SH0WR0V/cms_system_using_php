@@ -45,7 +45,6 @@ include "includes/header.php";
                         $user_firstname = $row['user_firstname'];
                         $user_lastname = $row['user_lastname'];
                         $user_email = $row['user_email'];
-                        $user_role = $row['user_role'];
                     }
                 }
 
@@ -59,7 +58,6 @@ include "includes/header.php";
 
                     $password = $_POST['password'];
                     $user_email = $_POST['user_email'];
-                    $user_role = $_POST['user_role'];
                     // $post_date = date('d-m-y');
                     // $post_comment_count = 4;
 
@@ -70,8 +68,7 @@ include "includes/header.php";
                     $query .= "user_firstname = '{$user_firstname}', ";
                     $query .= "user_lastname = '{$user_lastname}', ";
                     $query .= "password = '{$password}', ";
-                    $query .= "user_email = '{$user_email}', ";
-                    $query .= "user_role = '{$user_role}' ";
+                    $query .= "user_email = '{$user_email}' ";
                     $query .= "where username = '{$_SESSION['username']}'";
                     $insert_query = mysqli_query($connection, $query);
                     header("location: ./users.php");
@@ -113,21 +110,7 @@ include "includes/header.php";
         <input type="file" name="image">
     </div> -->
 
-                    <div class="form-group">
-                        <label for="user_role">Select Role</label>
-                        <select name="user_role" id="user_role">
-                            <option value="<?php echo $user_role; ?>"><?php echo $user_role; ?></option>
-                            <?php
-                            if ($user_role == 'admin') {
-                                echo "<option value='subscriber'>subscriber</option>";
-                            } else {
-                                echo "<option value='admin'>admin</option>";
-                            }
-                            ?>
-                        </select>
-
-                        <!-- <input type="text" class="form-control" name="post_category_id"> -->
-                    </div>
+                   
 
                     <!-- <div class="form-group">
         <label for="randSalt">Rand Salt</label>
