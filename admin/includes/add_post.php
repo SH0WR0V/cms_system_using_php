@@ -18,6 +18,7 @@ if (isset($_POST['create_post'])) {
     $query = "INSERT into posts (post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_status) 
     VALUES ('{$post_category_id}', '{$post_title}', '{$post_author}', now(), '{$post_image}', '{$post_content}', '{$post_tags}', '{$post_status}')";
     $insert_query = mysqli_query($connection, $query);
+    echo "New Post Added " . " " . "<a href='./posts.php'>view all posts</a>";
 }
 
 ?>
@@ -27,7 +28,7 @@ if (isset($_POST['create_post'])) {
 <form action="" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="title">Post Title</label>
-        <input type="text" class="form-control" name="title">
+        <input type="text" class="form-control" name="title" required>
     </div>
 
     <div class="form-group">
@@ -50,12 +51,12 @@ if (isset($_POST['create_post'])) {
 
     <div class="form-group">
         <label for="author">Post Author</label>
-        <input type="text" class="form-control" name="author">
+        <input type="text" class="form-control" name="author" required>
     </div>
 
     <div class="form-group">
         <label for="post_status">Post Status</label>
-        <input type="text" class="form-control" name="post_status">
+        <input type="text" class="form-control" name="post_status" required>
     </div>
 
     <div class="form-group">
@@ -65,12 +66,12 @@ if (isset($_POST['create_post'])) {
 
     <div class="form-group">
         <label for="post_tags">Post Tags</label>
-        <input type="text" class="form-control" name="post_tags">
+        <input type="text" class="form-control" name="post_tags" required>
     </div>
 
     <div class="form-group">
         <label for="post_content">Post Content</label>
-        <textarea class="form-control" name="post_content" id="" cols="30" rows="10"></textarea>
+        <textarea class="form-control" name="post_content" id="" cols="30" rows="10" required></textarea>
     </div>
 
     <div class="form-group">
