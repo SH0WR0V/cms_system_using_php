@@ -147,17 +147,29 @@ include "includes/header.php";
 
 
 <?php
+    $query_for_published_posts = "SELECT * FROM posts where post_status = 'published'";
+    $query_for_published_posts_result = mysqli_query($connection, $query_for_published_posts);
+    $published_posts_count = mysqli_num_rows($query_for_published_posts_result);
+
     $query_for_draft_posts = "SELECT * FROM posts where post_status = 'draft'";
     $query_for_draft_posts_result = mysqli_query($connection, $query_for_draft_posts);
     $draft_posts_count = mysqli_num_rows($query_for_draft_posts_result);
+
+    $query_for_app_comments = "SELECT * FROM comments where comment_status = 'approved'";
+    $query_for_app_comments_result = mysqli_query($connection, $query_for_app_comments);
+    $app_comments_count = mysqli_num_rows($query_for_app_comments_result);
 
     $query_for_unapp_comments = "SELECT * FROM comments where comment_status = 'unapproved'";
     $query_for_unapp_comments_result = mysqli_query($connection, $query_for_unapp_comments);
     $unapp_comments_count = mysqli_num_rows($query_for_unapp_comments_result);
 
+    $query_for_user_admin = "SELECT * FROM users where user_role = 'admin'";
+    $query_for_user_admin_result = mysqli_query($connection, $query_for_user_admin);
+    $query_for_user_admin_result_count = mysqli_num_rows($query_for_user_admin_result);
+
     $query_for_user_subscriber = "SELECT * FROM users where user_role = 'subscriber'";
-    $query_for_draft_posts_result = mysqli_query($connection, $query_for_user_subscriber);
-    $query_for_user_subscriber_count = mysqli_num_rows($query_for_draft_posts_result);
+    $query_for_user_subscriber_result = mysqli_query($connection, $query_for_user_subscriber);
+    $query_for_user_subscriber_count = mysqli_num_rows($query_for_user_subscriber_result);
 ?>
 
 
@@ -170,8 +182,8 @@ include "includes/header.php";
         var data = google.visualization.arrayToDataTable([
             ['Data', 'Count'],
             <?php
-                $title = ['Posts', 'Draft Posts', 'Comments', 'Unapproved Comments', 'Users', 'Subscribers', 'Categories'];
-                $value = [$post_counts, $draft_posts_count, $comment_counts, $unapp_comments_count, $user_counts, $query_for_user_subscriber_count, $category_counts];
+                $title = ['Active Posts', 'Draft Posts', 'Approved Comments', 'Unapproved Comments', 'Admins', 'Subscribers', 'Categories'];
+                $value = [$published_posts_count, $draft_posts_count, $app_comments_count, $unapp_comments_count, $query_for_user_admin_result_count, $query_for_user_subscriber_count, $category_counts];
 
                 for($i=0 ; $i<7; $i++){
                     echo "['{$title[$i]}'" . "," . "{$value[$i]}],";

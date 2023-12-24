@@ -55,6 +55,8 @@ if (isset($_POST['update_post'])) {
     if (!$update_query) {
         die("QUERY FAILED" . mysqli_error($connection));
     }
+    echo "<p class='bg-success'><b>Post Updated  </b><a href='../post.php?p_id=$edit_post_id'> check post</a> or <a href='./posts.php'> edit more posts?</a></p>";
+    echo "<br>";
 }
 
 ?>
@@ -71,6 +73,15 @@ if (isset($_POST['update_post'])) {
     <div class="form-group">
         <label for="post_category">Post Category</label>
         <select name="post_category" id="post_category">
+        <?php
+            $query_for_selected_category = "SELECT * from categories WHERE cat_id = $post_category_id";
+            $query_for_selected_category_result = mysqli_query($connection, $query_for_selected_category);
+            while ($row = mysqli_fetch_assoc($query_for_selected_category_result)) {
+                $cat_title = $row['cat_title'];
+                $cat_id = $row['cat_id'];
+            }
+            ?>
+        <option value="<?php echo $cat_id; ?>"><?php echo $cat_title; ?></option>
             <?php
             $query = "SELECT * from categories";
             $categories_query_result = mysqli_query($connection, $query);
@@ -90,7 +101,14 @@ if (isset($_POST['update_post'])) {
 
     <div class="form-group">
         <label for="post_status">Post Status</label>
-        <input type="text" class="form-control" name="post_status" value="<?php echo $post_status ?>">
+        <input type="radio" name="post_status" value="<?php echo $post_status; ?>" checked><?php echo $post_status; ?>
+        <?php 
+                if($post_status === 'published'){
+                    echo "<input type='radio' name='post_status' value='draft'> Draft";
+                } else{
+                    echo "<input type='radio' name='post_status' value='published'> Published";
+                }
+            ?>
     </div>
 
     <div class="form-group">

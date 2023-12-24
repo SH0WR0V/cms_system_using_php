@@ -120,6 +120,9 @@ include "includes/header.php";
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary" name="edit_profile" value="Update Profile">
                     </div>
+
+                    
+
                 </form>
 
 

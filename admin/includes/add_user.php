@@ -29,27 +29,27 @@ if (isset($_POST['create_user'])) {
 
     <div class="form-group">
         <label for="user_firstname">First Name</label>
-        <input type="text" class="form-control" name="user_firstname">
+        <input type="text" class="form-control" name="user_firstname" required>
     </div>
 
     <div class="form-group">
         <label for="user_lastname">Last Name</label>
-        <input type="text" class="form-control" name="user_lastname">
+        <input type="text" class="form-control" name="user_lastname" required>
     </div>
 
     <div class="form-group">
         <label for="username">Username</label>
-        <input type="text" class="form-control" name="username">
+        <input type="text" class="form-control" name="username" required>
     </div>
 
     <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" class="form-control" name="password">
+        <input type="password" class="form-control" name="password" required>
     </div>
 
     <div class="form-group">
         <label for="user_email">Email</label>
-        <input type="email" class="form-control" name="user_email">
+        <input type="email" class="form-control" name="user_email" required>
     </div>
 
     <!-- <div class="form-group">

@@ -24,7 +24,7 @@
             if (isset($_GET['categories'])) {
                 $cat_id = $_GET['categories'];
             }
-            $query = "select * from posts where post_category_id = $cat_id";
+            $query = "select * from posts where post_category_id = $cat_id AND post_status = 'published'";
             $data = mysqli_query($connection, $query);
 
             while ($row = mysqli_fetch_assoc($data)) {

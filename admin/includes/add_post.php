@@ -18,7 +18,8 @@ if (isset($_POST['create_post'])) {
     $query = "INSERT into posts (post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_status) 
     VALUES ('{$post_category_id}', '{$post_title}', '{$post_author}', now(), '{$post_image}', '{$post_content}', '{$post_tags}', '{$post_status}')";
     $insert_query = mysqli_query($connection, $query);
-    echo "New Post Added " . " " . "<a href='./posts.php'>view all posts</a>";
+    echo "<p class='bg-success'><b>New Post Added  </b><a href='./posts.php'>  go back?</a></p>";
+    echo "<br>";
 }
 
 ?>
@@ -54,9 +55,18 @@ if (isset($_POST['create_post'])) {
         <input type="text" class="form-control" name="author" required>
     </div>
 
+    <!-- <div class="form-group">
+        <label for="post_status">Post Status</label>
+        <select name="post_status" id="post_status">
+            <option value='draft'>Draft</option>
+            <option value='published'>Published</option>
+        </select>
+    </div> -->
+
     <div class="form-group">
         <label for="post_status">Post Status</label>
-        <input type="text" class="form-control" name="post_status" required>
+        <input type="radio" name="post_status" value="draft" checked> Draft
+        <input type="radio" name="post_status" value="published" > Published
     </div>
 
     <div class="form-group">
@@ -77,4 +87,5 @@ if (isset($_POST['create_post'])) {
     <div class="form-group">
         <input type="submit" class="btn btn-primary" name="create_post" value="Publish Post">
     </div>
+
 </form>
