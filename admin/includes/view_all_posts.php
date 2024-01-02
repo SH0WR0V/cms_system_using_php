@@ -1,6 +1,50 @@
+<?php
+    if(isset($_POST['checkBoxArray'])){
+        foreach ($_POST['checkBoxArray'] as $checkBoxArray){
+            $bulk_options = $_POST['bulk_options'];
+
+            switch($bulk_options){
+                case 'published':
+                    $query = "UPDATE posts SET post_status = '$bulk_options' WHERE post_id = {$checkBoxArray}";
+                    $query_result = mysqli_query($connection, $query);
+                    break;
+
+                case 'draft':
+                    $query = "UPDATE posts SET post_status = '$bulk_options' WHERE post_id = {$checkBoxArray}";
+                    $query_result = mysqli_query($connection, $query);
+                    break;
+
+                case 'delete':
+                    $query = "DELETE FROM posts WHERE post_id = {$checkBoxArray}";
+                    $query_result = mysqli_query($connection, $query);
+                    break;
+            }
+        }
+    }
+?>
+
+
+<form action="" method = "post">
+
+
 <table class="table table-bordered table-hover">
+
+<div id="bulkOptionContainer"  class="col-xs-4">
+    <select name="bulk_options" id="" class="form-control">
+        <option value="">Select Options</option>
+        <option value="published">Publish</option>
+        <option value="draft">Draft</option>
+        <option value="delete">Delete</option>
+    </select>
+</div>
+<div class="col-xs-4">
+    <input type="submit" name="submit" value="Apply" class="btn btn-success">
+    <a href="" class="btn btn-primary">Add New</a>
+</div>
+<br><br><br>
     <thead>
         <tr>
+            <th><input type="checkbox" id="selectAllBoxs"></th>
             <th>Id</th>
             <th>Author</th>
             <th>Title</th>
@@ -31,6 +75,9 @@
             $post_date = $row['post_date'];
 
             echo "<tr>";
+            ?>
+                <td><input type="checkbox" class="checkBoxes" name="checkBoxArray[]" value="<?php echo $post_id ?>"></td>
+            <?php
             echo "<td>$post_id</td>";
             echo "<td>$post_author</td>";
             echo "<td>$post_title</td>";
@@ -62,3 +109,5 @@
         ?>
     </tbody>
 </table>
+
+</form>
