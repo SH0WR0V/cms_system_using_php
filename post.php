@@ -58,17 +58,23 @@
 
             <?php
             if (isset($_POST['create_comment'])) {
-                // $post_id = $_GET['p_id'];
+                
                 $comment_author = $_POST['comment_author'];
                 $comment_email = $_POST['comment_email'];
                 $comment_content = $_POST['comment_content'];
 
-                $comment_query = "INSERT INTO comments (comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date) ";
-                $comment_query .= "VALUES ($post_id, '{$comment_author}', '{$comment_email}', '{$comment_content}', 'unapproved', now())";
-                $comment_query_data = mysqli_query($connection, $comment_query);
+                if(!empty($comment_author) && !empty($comment_email) && !empty($comment_content)){
+                    $comment_query = "INSERT INTO comments (comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date) ";
+                    $comment_query .= "VALUES ($post_id, '{$comment_author}', '{$comment_email}', '{$comment_content}', 'unapproved', now())";
+                    $comment_query_data = mysqli_query($connection, $comment_query);
 
-                $comment_count_query = "UPDATE posts SET post_comment_count = post_comment_count + 1 WHERE post_id = '{$post_id}'";
-                $comment_count_query_data = mysqli_query($connection, $comment_count_query);
+                    $comment_count_query = "UPDATE posts SET post_comment_count = post_comment_count + 1 WHERE post_id = '{$post_id}'";
+                    $comment_count_query_data = mysqli_query($connection, $comment_count_query);
+                }
+                // $post_id = $_GET['p_id'];
+                else{
+                    echo "<script>alert('Please fill all the boxes')</script>";
+                }
             }
 
             ?>
