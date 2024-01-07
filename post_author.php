@@ -21,10 +21,10 @@
             <!-- First Blog Post -->
 
             <?php
-            if (isset($_GET['categories'])) {
-                $cat_id = $_GET['categories'];
+            if (isset($_GET['a_name'])) {
+                $author_name = $_GET['a_name'];
             }
-            $query = "select * from posts where post_category_id = $cat_id AND post_status = 'published'";
+            $query = "select * from posts where post_author = '{$author_name}' AND post_status = 'published'";
             $data = mysqli_query($connection, $query);
 
             while ($row = mysqli_fetch_assoc($data)) {
@@ -33,7 +33,7 @@
                 $post_author = $row['post_author'];
                 $post_date = $row['post_date'];
                 $post_image = $row['post_image'];
-                $post_content = substr($row['post_content'], 0, 150);
+                $post_content = $row['post_content'];
             ?>
 
                 <h2>
@@ -47,7 +47,6 @@
                 <a href="post.php?p_id=<?php echo $post_id; ?>"><img class="img-responsive" src="images/<?php echo $post_image ?>" alt=""></a>
                 <hr>
                 <p><?php echo $post_content ?></p>
-                <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
                 <hr>
 
@@ -57,6 +56,13 @@
             <?php
             }
             ?>
+
+
+            <!-- Posted Comments -->
+
+
+
+
 
         </div>
 
