@@ -47,7 +47,8 @@
                     <hr>
                     <a href="post.php?p_id=<?php echo $post_id; ?>"><img class="img-responsive" src="images/<?php echo $post_image ?>" alt=""></a>
                     <hr>
-                    <small style="color:gray; display:block; text-align:end;">Views <?php echo $post_view_counts ?></small>
+                    <small style="color:gray; display:block; text-align:end;"><?php echo $post_view_counts ?> views</small>
+                    <br>
                     <p><?php echo $post_content ?></p>
 
                     <a class="btn btn-primary" href="post.php?p_id=<?php echo $post_id; ?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
