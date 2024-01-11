@@ -13,18 +13,39 @@
         <!-- Blog Entries Column -->
         <div class="col-md-8">
 
-            <h1 class="page-header">
+            <!-- <h1 class="page-header">
                 Page Heading
                 <small>Secondary Text</small>
-            </h1>
+            </h1> -->
 
             <!-- First Blog Post -->
+            <?php $per_page = 5; ?>
+            <?php $page = ""; ?>
 
             <?php
-            $query = "select * from posts";
-            $data = mysqli_query($connection, $query);
+            if (isset($_GET['page'])) {
+                $page = $_GET['page'];
 
-            while ($row = mysqli_fetch_assoc($data)) {
+                if ($page == 1) {
+                    $set_post_no = 0;
+                } else {
+                    $set_post_no = ($page * $per_page) - $per_page;
+                }
+            } else {
+                $set_post_no = 0;
+            }
+            ?>
+
+            <?php
+            $query = "SELECT * FROM posts";
+            $data = mysqli_query($connection, $query);
+            $count = mysqli_num_rows($data);
+            $count = ceil($count / $per_page);
+
+            $query_for_post_data = "SELECT * FROM posts LIMIT $set_post_no, $per_page";
+            $result = mysqli_query($connection, $query_for_post_data);
+
+            while ($row = mysqli_fetch_assoc($result)) {
                 $post_id = $row['post_id'];
                 $post_title = $row['post_title'];
                 $post_author = $row['post_author'];
@@ -36,7 +57,7 @@
 
                 if ($post_status == 'published') {
             ?>
-                    <h2>
+                    <h2 class=".font-weight-bolder">
                         <a href="post.php?p_id=<?php echo $post_id; ?>"><?php echo $post_title ?></a>
                     </h2>
                     <p class="lead">
@@ -67,7 +88,18 @@
     </div>
     <!-- /.row -->
 
-    <hr>
+    <ul class="pager">
+        <?php
+        for ($i = 1; $i <= $count; $i++) {
+            if ($i == $page) {
+                echo "<li><a class='active' href='index.php?page={$i}'>$i</a></li>";
+            } else {
+                echo "<li><a href='index.php?page={$i}'>$i</a></li>";
+            }
+        }
+        ?>
+        <li></li>
+    </ul>
 
     <!-- Footer -->
     <?php include 'includes/footer.php' ?>
