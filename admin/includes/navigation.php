@@ -1,3 +1,28 @@
+<?php
+$session = session_id();
+$time = time();
+$time_out_in_seconds = 30;
+$time_out = $time - $time_out_in_seconds;
+$userid = $_SESSION['userid'];
+// $query_for_count = "SELECT * FROM users WHERE session = '$session'";
+// $query_for_count_result = mysqli_query($connection, $query_for_count);
+// $count = mysqli_num_rows($query_for_count_result);
+// $user_session = $row['session'];
+// $user_time = $row['time'];
+// if ($count == NULL) {
+mysqli_query($connection, "UPDATE users SET session = '$session', time = '$time' WHERE user_id = $userid");
+// } else {
+//     mysqli_query($connection, "UPDATE users SET time = $time WHERE user_id = $userid");
+// }
+
+$users_online_count = mysqli_query($connection, "SELECT * FROM users WHERE time > $time_out");
+$users_online_count_result = mysqli_num_rows($users_online_count);
+
+
+?>
+
+
+
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -12,6 +37,7 @@
 
     <!-- Top Menu Items -->
     <ul class="nav navbar-right top-nav">
+        <li><a href="">Users Online: <?php echo $users_online_count_result; ?></a></li>
         <li><a href="../index.php">Home Site</a></li>
 
 
@@ -37,7 +63,7 @@
 
 
             <li>
-                <a href="javascript:;" data-toggle="collapse" data-target="#posts_dropdown"><i class="fa-solid fa-file-lines"></i>  Posts<i class="fa fa-fw fa-caret-down"></i></a>
+                <a href="javascript:;" data-toggle="collapse" data-target="#posts_dropdown"><i class="fa-solid fa-file-lines"></i> Posts<i class="fa fa-fw fa-caret-down"></i></a>
                 <ul id="posts_dropdown" class="collapse">
                     <li>
                         <a href="./posts.php"> View All Posts</a>
