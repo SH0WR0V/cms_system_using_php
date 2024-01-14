@@ -8,6 +8,7 @@
 
 <?php
 $message = "";
+$message2 = "";
 
 if (isset($_POST['submit'])) {
     $username = $_POST['username'];
@@ -24,8 +25,14 @@ if (isset($_POST['submit'])) {
         $query_for_registration = "INSERT into users (username, password, user_email, user_role) 
             VALUES ('{$username}', '{$password}', '{$email}', 'subscriber')";
         $insert_query = mysqli_query($connection, $query_for_registration);
+        unset($message);
+        unset($username);
+        unset($email);
+        unset($password);
+        $message = "";
 
-        header("Location: registration.php");
+        $message2 = "Registration Successful";
+        // header("Location: registration.php");
     } else {
         $message = "*This Field cannot be empty";
     }
@@ -43,7 +50,10 @@ if (isset($_POST['submit'])) {
                 <div class="col-xs-6 col-xs-offset-3">
                     <div class="form-wrap">
                         <h1>Register</h1>
-                        <form role="form" action="registration.php" method="post" id="login-form" autocomplete="off">
+                        <b class="bg-success"><?php if (isset($message2)) {
+                                                    echo $message2;
+                                                }  ?></b>
+                        <form role=" form" action="registration.php" method="post" id="login-form" autocomplete="off">
                             <div class="form-group">
                                 <div><b style="color:red;"><?php if (empty($username)) {
                                                                 echo $message;
@@ -67,9 +77,7 @@ if (isset($_POST['submit'])) {
                                                                 echo $message;
                                                             } ?></b></div>
                                 <label for="password" class="sr-only">Password</label>
-                                <input type="password" name="password" id="key" class="form-control" placeholder="Password" value="<?php if (isset($password)) {
-                                                                                                                                        echo $password;
-                                                                                                                                    }  ?>">
+                                <input type="password" name="password" id="key" class="form-control" placeholder="Password" value="">
                             </div>
 
                             <input type="submit" name="submit" id="btn-login" class="btn btn-success btn-lg btn-block" value="Register">
