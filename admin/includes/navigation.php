@@ -1,23 +1,15 @@
 <?php
+
 $session = session_id();
 $time = time();
 $time_out_in_seconds = 30;
 $time_out = $time - $time_out_in_seconds;
 $userid = $_SESSION['userid'];
-// $query_for_count = "SELECT * FROM users WHERE session = '$session'";
-// $query_for_count_result = mysqli_query($connection, $query_for_count);
-// $count = mysqli_num_rows($query_for_count_result);
-// $user_session = $row['session'];
-// $user_time = $row['time'];
-// if ($count == NULL) {
+
 mysqli_query($connection, "UPDATE users SET session = '$session', time = '$time' WHERE user_id = $userid");
-// } else {
-//     mysqli_query($connection, "UPDATE users SET time = $time WHERE user_id = $userid");
-// }
 
 $users_online_count = mysqli_query($connection, "SELECT * FROM users WHERE time > $time_out");
 $users_online_count_result = mysqli_num_rows($users_online_count);
-
 
 ?>
 

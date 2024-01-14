@@ -110,7 +110,7 @@ include "includes/header.php";
         <input type="file" name="image">
     </div> -->
 
-                   
+
 
                     <!-- <div class="form-group">
         <label for="randSalt">Rand Salt</label>
@@ -121,7 +121,7 @@ include "includes/header.php";
                         <input type="submit" class="btn btn-primary" name="edit_profile" value="Update Profile">
                     </div>
 
-                    
+
 
                 </form>
 
