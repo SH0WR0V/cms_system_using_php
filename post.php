@@ -72,22 +72,46 @@
                     }
 
                     ?>
+                    <?php
+                    if (isset($_SESSION['username'])) {
+                    ?>
+                        <div class="well">
+                            <h4>Leave a Comment:</h4>
+                            <form action="" method="POST" role="form">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="write your name here" name="comment_author" value="<?php echo $_SESSION['username'] ?>" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" placeholder="write your email here" name="comment_email">
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control" rows="3" placeholder="leave a comment" name="comment_content"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary" name="create_comment">Comment</button>
+                            </form>
+                        </div>
+                    <?php
+                    } else {
+                    ?>
+                        <div class="well">
+                            <h4>Leave a Comment:</h4>
+                            <form action="" method="POST" role="form">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="please login to continue" name="comment_author" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" placeholder="please login to continue" name="comment_email" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control" rows="3" placeholder="please login to continue" name="comment_content" readonly></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary" name="create_comment">Comment</button>
+                            </form>
+                        </div>
+                    <?php
+                    }
+                    ?>
 
-                    <div class="well">
-                        <h4>Leave a Comment:</h4>
-                        <form action="" method="POST" role="form">
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="write your name here" name="comment_author">
-                            </div>
-                            <div class="form-group">
-                                <input type="email" class="form-control" placeholder="write your email here" name="comment_email">
-                            </div>
-                            <div class="form-group">
-                                <textarea class="form-control" rows="3" placeholder="leave a comment" name="comment_content"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary" name="create_comment">Comment</button>
-                        </form>
-                    </div>
 
             <?php }
             } else {

@@ -43,8 +43,34 @@
 
 
             </ul>
+            <?php if (isset($_SESSION['username'])) {
+            ?>
+                <ul class="navbar-right top-nav">
+                    <li class="dropdown">
+
+                        <a href="#" style="margin-top: 10px;" class="dropdown-toggle btn btn-success" data-toggle="dropdown"><small><?php if (isset($_SESSION['username'])) {
+                                                                                                                                        echo $_SESSION['username'];
+                                                                                                                                    } ?></small> <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <!-- <li>
+                            <a href=""><i class="fa fa-fw fa-user"></i> Profile</a>
+                        </li> -->
+                            <!-- <li class="divider"></li> -->
+                            <li>
+                                <a href="includes/logout.php">Log Out</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            <?php
+            } ?>
+
+
+
         </div>
         <!-- /.navbar-collapse -->
+
     </div>
+
     <!-- /.container -->
 </nav>
