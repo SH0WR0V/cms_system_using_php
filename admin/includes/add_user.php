@@ -8,7 +8,7 @@ if (isset($_POST['create_user'])) {
     // $post_image_temp = $_FILES['image']['tmp_name'];
 
     $password = $_POST['password'];
-    $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
+    $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 10));
     $user_email = $_POST['user_email'];
     $user_role = $_POST['user_role'];
     // $post_date = date('d-m-y');

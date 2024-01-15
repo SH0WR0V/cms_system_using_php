@@ -57,6 +57,7 @@ include "includes/header.php";
                     // $post_image_temp = $_FILES['image']['tmp_name'];
 
                     $password = $_POST['password'];
+                    $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 10));
                     $user_email = $_POST['user_email'];
                     // $post_date = date('d-m-y');
                     // $post_comment_count = 4;
@@ -97,7 +98,7 @@ include "includes/header.php";
 
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" name="password" value="<?php echo $password; ?>">
+                        <input type="password" class="form-control" name="password" value="" required>
                     </div>
 
                     <div class="form-group">

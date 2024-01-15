@@ -13,11 +13,6 @@
         <!-- Blog Entries Column -->
         <div class="col-md-8">
 
-            <h1 class="page-header">
-                Page Heading
-                <small>Secondary Text</small>
-            </h1>
-
             <!-- First Blog Post -->
 
             <?php
@@ -55,6 +50,7 @@
 
 
                     <?php
+
                     if (isset($_POST['create_comment'])) {
 
                         $comment_author = $_POST['comment_author'];
@@ -66,8 +62,8 @@
                             $comment_query .= "VALUES ($post_id, '{$comment_author}', '{$comment_email}', '{$comment_content}', 'unapproved', now())";
                             $comment_query_data = mysqli_query($connection, $comment_query);
 
-                            $comment_count_query = "UPDATE posts SET post_comment_count = post_comment_count + 1 WHERE post_id = '{$post_id}'";
-                            $comment_count_query_data = mysqli_query($connection, $comment_count_query);
+                            // $comment_count_query = "UPDATE posts SET post_comment_count = post_comment_count + 1 WHERE post_id = '{$post_id}'";
+                            // $comment_count_query_data = mysqli_query($connection, $comment_count_query);
                         }
                         // $post_id = $_GET['p_id'];
                         else {
