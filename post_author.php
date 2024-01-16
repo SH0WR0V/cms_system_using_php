@@ -41,7 +41,7 @@
                 <hr>
                 <a href="post.php?p_id=<?php echo $post_id; ?>"><img class="img-responsive" src="images/<?php echo $post_image ?>" alt=""></a>
                 <hr>
-                <p><?php echo $post_content ?></p>
+                <p class="text-justify"><?php echo $post_content ?></p>
 
                 <hr>
 

@@ -51,7 +51,7 @@
                 $post_author = $row['post_author'];
                 $post_date = $row['post_date'];
                 $post_image = $row['post_image'];
-                $post_content = substr($row['post_content'], 0, 150);
+                $post_content = substr($row['post_content'], 0, 200);
                 $post_status = $row['post_status'];
                 $post_view_counts = $row['post_view_counts'];
 
@@ -70,7 +70,7 @@
                     <hr>
                     <small style="color:gray; display:block; text-align:end;"><?php echo $post_view_counts ?> views</small>
                     <br>
-                    <p><?php echo $post_content ?></p>
+                    <p class="text-justify"><?php echo $post_content . "..." ?></p>
 
                     <a class="btn btn-primary" href="post.php?p_id=<?php echo $post_id; ?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 

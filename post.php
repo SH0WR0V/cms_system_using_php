@@ -43,7 +43,7 @@
                     <hr>
                     <img class="img-responsive" src="images/<?php echo $post_image ?>" alt="">
                     <hr>
-                    <p><?php echo $post_content ?></p>
+                    <p class="text-justify"><?php echo $post_content ?></p>
 
                     <hr>
 

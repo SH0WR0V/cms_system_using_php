@@ -56,12 +56,22 @@
             echo "</tr>";
         }
 
+
         if (isset($_GET['delete'])) {
-            $delete_user_id = $_GET['delete'];
-            $delete_user_id_query = "DELETE from users where user_id = {$delete_user_id}";
-            $delete_user_query = mysqli_query($connection, $delete_user_id_query);
-            header("Location: users.php");
+            if (isset($_SESSION['role'])) {
+                if ($_SESSION['role'] == 'admin') {
+                    $delete_user_id = mysqli_real_escape_string($connection, $_GET['delete']);
+                    $delete_user_id_query = "DELETE from users where user_id = {$delete_user_id}";
+                    $delete_user_query = mysqli_query($connection, $delete_user_id_query);
+                    header("Location: users.php");
+                } else {
+                    header("Location: index.php");
+                }
+            } else {
+                header("Location: index.php");
+            }
         }
+
 
         if (isset($_GET['change_role'])) {
             $change_user_id = $_GET['change_role'];

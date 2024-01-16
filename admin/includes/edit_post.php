@@ -15,7 +15,6 @@ while ($row = mysqli_fetch_assoc($result)) {
     $post_image = $row['post_image'];
     $post_content = $row['post_content'];
     $post_tags = $row['post_tags'];
-    $post_comment_count = $row['post_comment_count'];
     $post_date = $row['post_date'];
 }
 
@@ -73,7 +72,7 @@ if (isset($_POST['update_post'])) {
     <div class="form-group">
         <label for="post_category">Post Category</label>
         <select name="post_category" id="post_category">
-        <?php
+            <?php
             $query_for_selected_category = "SELECT * from categories WHERE cat_id = $post_category_id";
             $query_for_selected_category_result = mysqli_query($connection, $query_for_selected_category);
             while ($row = mysqli_fetch_assoc($query_for_selected_category_result)) {
@@ -81,7 +80,7 @@ if (isset($_POST['update_post'])) {
                 $cat_id = $row['cat_id'];
             }
             ?>
-        <option value="<?php echo $cat_id; ?>"><?php echo $cat_title; ?></option>
+            <option value="<?php echo $cat_id; ?>"><?php echo $cat_title; ?></option>
             <?php
             $query = "SELECT * from categories";
             $categories_query_result = mysqli_query($connection, $query);
@@ -102,13 +101,13 @@ if (isset($_POST['update_post'])) {
     <div class="form-group">
         <label for="post_status">Post Status</label>
         <input type="radio" name="post_status" value="<?php echo $post_status; ?>" checked><?php echo $post_status; ?>
-        <?php 
-                if($post_status === 'published'){
-                    echo "<input type='radio' name='post_status' value='draft'> Draft";
-                } else{
-                    echo "<input type='radio' name='post_status' value='published'> Published";
-                }
-            ?>
+        <?php
+        if ($post_status === 'published') {
+            echo "<input type='radio' name='post_status' value='draft'> Draft";
+        } else {
+            echo "<input type='radio' name='post_status' value='published'> Published";
+        }
+        ?>
     </div>
 
     <div class="form-group">

@@ -1,7 +1,6 @@
 <?php include "includes/db.php"; ?>
 <?php include "includes/header.php"; ?>
 
-
 <!-- Navigation -->
 
 <?php include "includes/navigation.php"; ?>
@@ -9,6 +8,19 @@
 <?php
 $message = "";
 $message2 = "";
+$message3 = "";
+
+$query = "SELECT username From users";
+$result = mysqli_query($connection, $query);
+
+// if (isset($_POST['username'])) {
+//     while ($row = mysqli_fetch_assoc($result)) {
+//         $db_username = $row['username'];
+//         if ($_POST['username'] === $db_username) {
+//             $message3 = "*username is already taken";
+//         }
+//     }
+// }
 
 if (isset($_POST['submit'])) {
     $username = $_POST['username'];
@@ -17,26 +29,32 @@ if (isset($_POST['submit'])) {
 
     if (!empty($username) && !empty($email) && !empty($password)) {
         $username = mysqli_real_escape_string($connection, $username);
-        $email = mysqli_real_escape_string($connection, $email);
-        $password = mysqli_real_escape_string($connection, $password);
 
-        $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
+        $query = "SELECT username FROM users WHERE username = '$username'";
+        $result = mysqli_query($connection, $query);
+        if (mysqli_num_rows($result) != 0) {
+            $message3 = "*username is already taken";
+        } else {
 
-        $query_for_registration = "INSERT into users (username, password, user_email, user_role) 
+            $email = mysqli_real_escape_string($connection, $email);
+            $password = mysqli_real_escape_string($connection, $password);
+            $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
+            $query_for_registration = "INSERT into users (username, password, user_email, user_role) 
             VALUES ('{$username}', '{$password}', '{$email}', 'subscriber')";
-        $insert_query = mysqli_query($connection, $query_for_registration);
-        unset($message);
-        unset($username);
-        unset($email);
-        unset($password);
-        $message = "";
+            $insert_query = mysqli_query($connection, $query_for_registration);
+            unset($message);
+            unset($username);
+            unset($email);
+            $message = "";
+            $message2 = "Registration Successful";
+            // header("Location: registration.php");
 
-        $message2 = "Registration Successful";
-        // header("Location: registration.php");
+        }
     } else {
         $message = "*This Field cannot be empty";
     }
 }
+
 ?>
 
 
@@ -50,10 +68,13 @@ if (isset($_POST['submit'])) {
                 <div class="col-xs-6 col-xs-offset-3">
                     <div class="form-wrap">
                         <h1>Register</h1>
+                        <b class="bg-danger"><?php if (isset($message3)) {
+                                                    echo $message3;
+                                                }  ?></b>
                         <b class="bg-success"><?php if (isset($message2)) {
                                                     echo $message2;
                                                 }  ?></b>
-                        <form role=" form" action="registration.php" method="post" id="login-form" autocomplete="off">
+                        <form action="registration.php" method="post" id="login-form" autocomplete="off">
                             <div class="form-group">
                                 <div><b style="color:red;"><?php if (empty($username)) {
                                                                 echo $message;
