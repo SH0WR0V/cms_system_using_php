@@ -6,21 +6,14 @@
 <?php include "includes/navigation.php"; ?>
 
 <?php
-$message = "";
+$username_message = "";
+$email_message = "";
+$password_message = "";
 $message2 = "";
 $message3 = "";
 
 $query = "SELECT username From users";
 $result = mysqli_query($connection, $query);
-
-// if (isset($_POST['username'])) {
-//     while ($row = mysqli_fetch_assoc($result)) {
-//         $db_username = $row['username'];
-//         if ($_POST['username'] === $db_username) {
-//             $message3 = "*username is already taken";
-//         }
-//     }
-// }
 
 if (isset($_POST['submit'])) {
     $username = $_POST['username'];
@@ -33,7 +26,7 @@ if (isset($_POST['submit'])) {
         $query = "SELECT username FROM users WHERE username = '$username'";
         $result = mysqli_query($connection, $query);
         if (mysqli_num_rows($result) != 0) {
-            $message3 = "*username is already taken";
+            $message3 = "*this username is already taken";
         } else {
 
             $email = mysqli_real_escape_string($connection, $email);
@@ -42,16 +35,22 @@ if (isset($_POST['submit'])) {
             $query_for_registration = "INSERT into users (username, password, user_email, user_role) 
             VALUES ('{$username}', '{$password}', '{$email}', 'subscriber')";
             $insert_query = mysqli_query($connection, $query_for_registration);
-            unset($message);
+            unset($username_message);
+            unset($email_message);
+            unset($password_message);
             unset($username);
             unset($email);
-            $message = "";
+            $username_message = "";
+            $email_message = "";
+            $password_message = "";
             $message2 = "Registration Successful";
             // header("Location: registration.php");
 
         }
     } else {
-        $message = "*This Field cannot be empty";
+        $username_message = "*username cannot be empty";
+        $email_message = "*email cannot be empty";
+        $password_message = "*password cannot be empty";
     }
 }
 
@@ -68,16 +67,16 @@ if (isset($_POST['submit'])) {
                 <div class="col-xs-6 col-xs-offset-3">
                     <div class="form-wrap">
                         <h1>Register</h1>
-                        <b class="bg-danger"><?php if (isset($message3)) {
+                        <p class="bg-danger"><?php if (isset($message3)) {
                                                     echo $message3;
-                                                }  ?></b>
-                        <b class="bg-success"><?php if (isset($message2)) {
+                                                }  ?></p>
+                        <p class="bg-success"><?php if (isset($message2)) {
                                                     echo $message2;
-                                                }  ?></b>
+                                                }  ?></p>
                         <form action="registration.php" method="post" id="login-form" autocomplete="off">
                             <div class="form-group">
                                 <div><b style="color:red;"><?php if (empty($username)) {
-                                                                echo $message;
+                                                                echo $username_message;
                                                             } ?></b></div>
                                 <label for="username" class="sr-only">username</label>
                                 <input type="text" name="username" id="username" class="form-control" placeholder="Enter Desired Username" value="<?php if (isset($username)) {
@@ -86,7 +85,7 @@ if (isset($_POST['submit'])) {
                             </div>
                             <div class="form-group">
                                 <div><b style="color:red;"><?php if (empty($email)) {
-                                                                echo $message;
+                                                                echo $email_message;
                                                             } ?></b></div>
                                 <label for="email" class="sr-only">Email</label>
                                 <input type="email" name="email" id="email" class="form-control" placeholder="somebody@example.com" value="<?php if (isset($email)) {
@@ -95,7 +94,7 @@ if (isset($_POST['submit'])) {
                             </div>
                             <div class="form-group">
                                 <div><b style="color:red;"><?php if (empty($password)) {
-                                                                echo $message;
+                                                                echo $password_message;
                                                             } ?></b></div>
                                 <label for="password" class="sr-only">Password</label>
                                 <input type="password" name="password" id="key" class="form-control" placeholder="Password" value="">

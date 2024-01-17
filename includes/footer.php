@@ -1,11 +1,9 @@
-<footer>
-    <div class="row">
-        <div class="col-lg-12">
-            <p>Copyright &copy; CMS system 2023</p>
-        </div>
-        <!-- /.col-lg-12 -->
+<footer class="text-center text-lg-start fixed-bottom">
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05); padding: 10px;">
+        Copyright &copy; CMS system 2023
     </div>
-    <!-- /.row -->
+    <!-- Copyright -->
 </footer>
 
 </div>

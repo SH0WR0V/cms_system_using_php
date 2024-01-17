@@ -23,6 +23,11 @@
                     echo "<li><a href='categories.php?categories=$cat_id'>{$cat_title}</a></li>";
                 }
                 ?>
+
+                <li>
+                    <a href="contact.php">Contact us</a>
+                </li>
+
                 <li>
                     <a href="admin">Admin</a>
                 </li>

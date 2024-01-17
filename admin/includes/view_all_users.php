@@ -26,30 +26,9 @@
             echo "<td>$user_id</td>";
             echo "<td>$username</td>";
             echo "<td>$user_firstname</td>";
-
-            // $query_for_cat_title = "select * from categories where cat_id = $post_category_id";
-            // $result_for_cat_title = mysqli_query($connection, $query_for_cat_title);
-            // while ($row = mysqli_fetch_assoc($result_for_cat_title)) {
-            //     $cat_title = $row['cat_title'];
-            // }
-            // echo "<td>$cat_title</td>";
-
             echo "<td>$user_lastname</td>";
             echo "<td>$user_email</td>";
             echo "<td>$user_role</td>";
-            // echo "<td>$query_for_post_title_data</td>";
-            // $query_for_post_title = "SELECT post_title FROM posts WHERE post_id = $comment_post_id";
-            // $query_for_post_title_data = mysqli_query($connection, $query_for_post_title);
-            // while ($row = mysqli_fetch_assoc($query_for_post_title_data)) {
-            //     $result_for_post_title = $row['post_title'];
-            // }
-            // echo "<td><a href='../post.php?p_id=$comment_post_id'>$result_for_post_title</a></td>";
-            // echo "<td>$comment_date</td>";
-            // echo "<td><a href='comments.php?c_status_app=$comment_id='>Approve</a></td>";
-            // echo "<td><a href='comments.php?c_status_unapp=$comment_id='>Unapprove</a></td>";
-            // echo "<td><a href='posts.php?delete='>Edit</a></td>";
-            // echo "<td><a href='comments.php?delete=$comment_id'>Delete</a></td>";
-            // echo "</tr>";
             echo "<td><a href='users.php?change_role=$user_id'>change role</a></td>";
             echo "<td><a href='users.php?source=edit_user&edit_user={$user_id}'>Edit</a></td>";
             echo "<td><a href='users.php?delete=$user_id'>Delete</a></td>";
@@ -89,13 +68,6 @@
             }
             header("Location: users.php");
         }
-
-        // if (isset($_GET['c_status_unapp'])) {
-        //     $comment_status_id = $_GET['c_status_unapp'];
-        //     $comment_status_unapprove_query = "UPDATE comments SET comment_status = 'unapproved' WHERE comment_id = '{$comment_status_id}'";
-        //     $comment_status_unapprove_query_result = mysqli_query($connection, $comment_status_unapprove_query);
-        //     header("Location: comments.php");
-        // }
         ?>
     </tbody>
 </table>
