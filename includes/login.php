@@ -6,6 +6,7 @@ session_start();
 
 <?php
 if (isset($_POST['login'])) {
+    $password_message = "password can't be empty";
     $username = $_POST['username'];
     $password = $_POST['password'];
 
