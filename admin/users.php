@@ -1,3 +1,4 @@
+//2nd comment
 <?php
 
 include "includes/header.php";
