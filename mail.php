@@ -20,8 +20,8 @@ if (isset($_POST["send"])) {
     $mail->isSMTP();                              //Send using SMTP
     $mail->Host       = 'smtp.gmail.com';       //Set the SMTP server to send through
     $mail->SMTPAuth   = true;             //Enable SMTP authentication
-    $mail->Username   = 'your email address';   //SMTP write your email
-    $mail->Password   = 'app password';      //SMTP password
+    $mail->Username   = 'sm.shahriar1231@gmail.com';   //SMTP write your email
+    $mail->Password   = 'lqjwhtntmkgmbwif';      //SMTP password
     $mail->SMTPSecure = 'ssl';            //Enable implicit SSL encryption
     $mail->Port       = 465;
 
@@ -36,12 +36,16 @@ if (isset($_POST["send"])) {
     $mail->Body    = $_POST["message"]; //email message
 
     // Success sent message alert
-    $mail->send();
-    echo
-    " 
+    $result = $mail->send();
+    if ($result) {
+        echo
+        " 
     <script> 
      alert('Message was sent successfully!');
      document.location.href = 'index.php';
     </script>
     ";
+    } else {
+        echo 'Email could not be sent. Error: ' . $mail->ErrorInfo;
+    }
 }
