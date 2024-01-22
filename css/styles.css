@@ -1,3 +1,7 @@
 .pager li .active {
   background-color: #e6e6fa !important;
 }
+
+.link_select {
+  text-decoration: none !important;
+}

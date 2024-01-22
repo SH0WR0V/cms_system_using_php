@@ -17,34 +17,48 @@
                 <?php
                 $query = "select * from categories";
                 $result = mysqli_query($connection, $query);
+
+                // $contact = "contact";
+                // $registration = "ragistration";
+
                 while ($row = mysqli_fetch_assoc($result)) {
                     $cat_id = $row['cat_id'];
                     $cat_title = $row['cat_title'];
-                    echo "<li><a href='categories.php?categories=$cat_id'>{$cat_title}</a></li>";
+
+                    $category_class = "";
+                    $registration_class = "";
+                    $contact_class = "";
+                    $page_name = basename($_SERVER['PHP_SELF']);
+                    $registration = "registration.php";
+                    $contact = "contact.php";
+
+                    if (isset($_GET['categories']) && $_GET['categories'] == $cat_id) {
+                        $category_class = "active";
+                    } elseif ($page_name == $registration) {
+                        $registration_class = "active";
+                    } elseif ($page_name == $contact) {
+                        $contact_class = "active";
+                    }
+
+                    echo "<li class = '$category_class'><a href='categories.php?categories=$cat_id'>{$cat_title}</a></li>";
                 }
                 ?>
 
-                <li>
+                <li class="<?php echo $contact_class ?>">
                     <a href="contact.php">Contact us</a>
                 </li>
 
-                <li>
-                    <a href="admin">Admin</a>
-                </li>
 
-                <li>
+                <li class="<?php echo $registration_class ?>">
                     <a href="registration.php">Register</a>
                 </li>
 
-                <!-- <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li> -->
+                <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
+                    echo "<li>";
+                    echo "<a href='admin'>Admin</a>";
+                    echo "</li>";
+                } ?>
+
 
 
             </ul>

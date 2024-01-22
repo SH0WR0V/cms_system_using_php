@@ -66,9 +66,9 @@
                             // $comment_count_query_data = mysqli_query($connection, $comment_count_query);
                         }
                         // $post_id = $_GET['p_id'];
-                        else {
-                            echo "<script>alert('Please fill all the boxes')</script>";
-                        }
+                        // else {
+                        //     echo "<script>alert('Please fill all the boxes')</script>";
+                        // }
                     }
 
                     ?>
@@ -82,10 +82,10 @@
                                     <input type="text" class="form-control" placeholder="write your name here" name="comment_author" value="<?php echo $_SESSION['username'] ?>" readonly>
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="write your email here" name="comment_email">
+                                    <input type="email" class="form-control" placeholder="write your email here" name="comment_email" required>
                                 </div>
                                 <div class="form-group">
-                                    <textarea class="form-control" rows="3" placeholder="leave a comment" name="comment_content"></textarea>
+                                    <textarea class="form-control" rows="3" placeholder="leave a comment" name="comment_content" required></textarea>
                                 </div>
                                 <button type="submit" class="btn btn-primary" name="create_comment">Comment</button>
                             </form>
