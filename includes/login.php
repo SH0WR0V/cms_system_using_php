@@ -42,7 +42,7 @@ if (isset($_POST['login'])) {
         $_SESSION['firstname'] = $db_user_firstname;
         $_SESSION['lastname'] = $db_user_lastname;
         $_SESSION['role'] = $db_user_role;
-        $_SESSION['user_id'] = $db_id;
+        $_SESSION['userid'] = $db_id;
         header("Location: ../index.php");
     } else {
         header("Location: ../index.php");

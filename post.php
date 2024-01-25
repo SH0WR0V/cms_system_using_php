@@ -5,6 +5,43 @@
 <!-- Navigation -->
 <?php include 'includes/navigation.php' ?>
 
+<?php include 'functions.php' ?>
+
+
+
+<?php
+if (isset($_GET['u_id'])) {
+    $post_id = $_GET['p_id'];
+    $user_id = $_GET['u_id'];
+
+    $query = "SELECT * FROM posts WHERE post_id=$post_id";
+    $post_result = mysqli_query($connection, $query);
+    $post = mysqli_fetch_array($post_result);
+    $likes = $post['likes'];
+
+    if (!login_user_liked_this_post_or_not($post_id)) {
+        mysqli_query($connection, "UPDATE posts SET likes=$likes+1 WHERE post_id = $post_id");
+        mysqli_query($connection, "INSERT INTO likes(user_id, post_id) VALUES($user_id, $post_id)");
+        header("Location: post.php?p_id=$post_id");
+    }
+}
+if (isset($_GET['user_id'])) {
+    $post_id = $_GET['p_id'];
+    $user_id = $_GET['user_id'];
+
+    $query = "SELECT * FROM posts WHERE post_id=$post_id";
+    $post_result = mysqli_query($connection, $query);
+    $post = mysqli_fetch_array($post_result);
+    $likes = $post['likes'];
+
+    if (login_user_unliked_this_post_or_not($post_id)) {
+        mysqli_query($connection, "UPDATE posts SET likes=$likes-1 WHERE post_id = $post_id");
+        mysqli_query($connection, "DELETE FROM likes WHERE post_id = $post_id AND user_id = $user_id");
+        header("Location: post.php?p_id=$post_id");
+    }
+}
+?>
+
 <!-- Page Content -->
 <div class="container">
 
@@ -43,6 +80,31 @@
                     <hr>
                     <img class="img-responsive" src="images/<?php echo $post_image ?>" alt="">
                     <hr>
+
+
+                    <?php while (mysqli_next_result($connection)) {;
+                    } ?>
+
+
+
+                    <div class="row">
+                        <b class="pull-right" style="padding-right:14px; font-size: 15px;"><a href="post.php?p_id=<?php echo $post_id; ?>&u_id=<?php if (isset($_SESSION['userid'])) {
+                                                                                                                                                    echo $_SESSION['userid'];
+                                                                                                                                                } else {
+                                                                                                                                                    echo 0;
+                                                                                                                                                }  ?>"><span class="glyphicon glyphicon-thumbs-up"></span> Like </a>&nbsp<a href="post.php?p_id=<?php echo $post_id; ?>&user_id=<?php if (isset($_SESSION['userid'])) {
+                                                                                                                                                                                                                                                                                    echo $_SESSION['userid'];
+                                                                                                                                                                                                                                                                                } else {
+                                                                                                                                                                                                                                                                                    echo 0;
+                                                                                                                                                                                                                                                                                }  ?>"><span class="glyphicon glyphicon-thumbs-down"></span> Unlike</a> | Likes: <?php get_post_likes($post_id); ?></b>
+                    </div>
+
+
+                    <?php while (mysqli_next_result($connection)) {;
+                    } ?>
+
+
+                    <br>
                     <p class="text-justify"><?php echo $post_content ?></p>
 
                     <hr>
@@ -61,14 +123,7 @@
                             $comment_query = "INSERT INTO comments (comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date) ";
                             $comment_query .= "VALUES ($post_id, '{$comment_author}', '{$comment_email}', '{$comment_content}', 'unapproved', now())";
                             $comment_query_data = mysqli_query($connection, $comment_query);
-
-                            // $comment_count_query = "UPDATE posts SET post_comment_count = post_comment_count + 1 WHERE post_id = '{$post_id}'";
-                            // $comment_count_query_data = mysqli_query($connection, $comment_count_query);
                         }
-                        // $post_id = $_GET['p_id'];
-                        // else {
-                        //     echo "<script>alert('Please fill all the boxes')</script>";
-                        // }
                     }
 
                     ?>
@@ -164,4 +219,4 @@
     <hr>
 
     <!-- Footer -->
-    <?php include 'includes/footer.php' ?>
+    <?php include 'includes/footer.php'; ?>
